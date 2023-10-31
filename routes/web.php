@@ -20,6 +20,6 @@ Route::get('/', HomeController::class);
 
 Route::get('usuarios', UsuarioController::class);
 
-Route::get('usuarios/create', function(){});
+/* Route::get('usuarios/create', function(){});
 
-Route::get('usuarios/{usuario}', function($usuario){});
+Route::get('usuarios/{usuario}', function($usuario){}); */
