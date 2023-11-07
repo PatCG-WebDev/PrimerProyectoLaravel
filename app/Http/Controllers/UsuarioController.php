@@ -3,24 +3,65 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\User;
+use App\Http\Requests\StoreUser;
+use App\Http\Requests\UpdateUser;
 
 class UsuarioController extends Controller
 {
 
-    /* public function __invoke()
-    {
-        // Tu lógica aquí
-    } */
     public function index(){ /* método para administrar la página principal */
-        return "Bienvenido a la página de usuarios";
+        $usuarios = User::orderBy('id','desc')->paginate();
+        return view('usuarios.index',compact('usuarios'));
     }
 
     public function create(){/* método para crear usuarios */
-        return "Aquí podrás crear un usuario nuevo";
+        return view('usuarios.create');
     }
 
-    public function show($usuario){ /* método para administar un usuario concreto */
-        return $usuario;
+    public function store(StoreUser $request){
+
+        $usuario = User::create($request->all()); /* asignación masiva */
+
+        return redirect()->route('usuarios.show', $usuario);
+    }
+
+    public function show(User $usuario){ /* método para administar un usuario concreto */
+        return view('usuarios.show', compact('usuario'));
+    }
+
+    public function edit(User $usuario){
+
+        return view('usuarios.edit', compact('usuario'));
+    }
+
+    public function update(UpdateUser $request, User $usuario){
+
+        $request->validate([
+            'name' => 'required|min:3',
+            'surName' => 'required',
+            'slug' => 'required|unique:users,slug,' . $usuario->id,
+            'userName' => 'required',
+            'password'=> 'required',
+            'email'=> 'required',
+            'phone' => 'required',
+            'seccion' =>'required',
+        ]);
+
+        $usuario->update($request->all()); /* asignación masiva */
+
+        return redirect()->route('usuarios.show', $usuario);
+
+    }
+
+    public function destroy(User $usuario){/* $usuario es un objeto de la clase  */
+        $usuario->delete();
+
+        return redirect()->route('usuarios.index', $usuario);
+    }
+
+    public function test(User $usuario){
+
+        return view('usuarios.test', compact('usuario'));
     }
 }

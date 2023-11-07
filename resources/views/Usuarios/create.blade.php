@@ -26,10 +26,23 @@
         <label>
             Apellidos:
             <br>
-            <input type="text" name="surname" value="{{old('surname')}}"> {{-- el método old va a recuperar lo que habíamos escrito en este campo cuando no se hayan completado todos los campor requeridos --}}
+            <input type="text" name="surName" value="{{old('surName')}}"> {{-- el método old va a recuperar lo que habíamos escrito en este campo cuando no se hayan completado todos los campor requeridos --}}
         </label>
 
-        @error('surname') {{-- en esto nos salta un mensaje cuando dejamos vacío un campo requerido --}}
+        @error('surName') {{-- en esto nos salta un mensaje cuando dejamos vacío un campo requerido --}}
+            <br>
+            <span>*{{$message}}</span>
+            <br>
+        @enderror
+        <br>
+
+        <label>
+            Slug:
+            <br>
+            <input type="text" name="slug" value="{{old('slug')}}"> {{-- el método old va a recuperar lo que habíamos escrito en este campo cuando no se hayan completado todos los campor requeridos --}}
+        </label>
+
+        @error('slug') {{-- en esto nos salta un mensaje cuando dejamos vacío un campo requerido --}}
             <br>
             <span>*{{$message}}</span>
             <br>

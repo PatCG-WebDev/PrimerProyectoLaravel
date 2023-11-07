@@ -21,6 +21,7 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
+            'slug' => fake()->slug(),
             'name' => fake()->name(),
             'surName' => fake()->firstName(),
             'userName' => fake()->userName(),
@@ -31,6 +32,7 @@ class UserFactory extends Factory
             'seccion' => fake()->randomElement(['1','2']),
             'remember_token' => Str::random(10),
         ];
+
     }
 
     /**

@@ -8,10 +8,10 @@
     <ul>
         @foreach ($usuarios as $usuario)
             <li>
-                <a href="{{route('usuarios.show', $usuario)}}">{{$usuario->name}}"</a>
+                <a href="{{route('usuarios.show', $usuario)}}">{{$usuario->name}} {{$usuario->surName}}</a>
             </li>
         @endforeach
     </ul>
 
-    {{$usuarios->links()}} {{-- Paginamos. Mostram
-@endos el menú para movernos por las diferentes páginas de los registos. --}}section
+    {{$usuarios->links()}} {{-- Paginamos. Mostramos el menú para movernos por las diferentes páginas de los registos. --}}
+    @endsection
