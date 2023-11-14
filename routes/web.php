@@ -1,8 +1,11 @@
 <?php
 
+use App\Http\Controllers\ContactanosController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UsuarioController;
+use App\Mail\ContactanosMailable;
+use Illuminate\Support\Facades\Mail;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,3 +48,15 @@ Route::resource('usuarios', UsuarioController::class); /* Englobamos todas las r
 
 */
 Route::view('nosotros', 'nosotros')->name('nosotros');
+
+/* Route::get('contactanos', function(){
+
+    Mail::to('paticia@gmail.com')->send(new ContactanosMailable);
+    return "Mensaje enviado";
+
+})->name('contactanos'); */
+
+Route::get('contactanos', [ContactanosController::class,'index'])->name('contactanos.index');
+Route::post('contactanos', [ContactanosController::class, 'store'])->name('contactanos.store');
+
+
