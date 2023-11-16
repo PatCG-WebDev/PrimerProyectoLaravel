@@ -60,8 +60,4 @@ class UsuarioController extends Controller
         return redirect()->route('usuarios.index', $usuario);
     }
 
-    public function test(User $usuario){
-
-        return view('usuarios.test', compact('usuario'));
-    }
 }

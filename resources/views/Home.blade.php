@@ -5,4 +5,6 @@
 
 @section('content')
     <h1>Bienvenido a la página principal</h1>
+
+    <p><a href="{{ route('login') }}">Iniciar sesión</a></p>
 @endsection

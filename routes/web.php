@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UsuarioController;
 use App\Mail\ContactanosMailable;
+use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Mail;
 
 /*
@@ -59,4 +60,5 @@ Route::view('nosotros', 'nosotros')->name('nosotros');
 Route::get('contactanos', [ContactanosController::class,'index'])->name('contactanos.index');
 Route::post('contactanos', [ContactanosController::class, 'store'])->name('contactanos.store');
 
-
+Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
+Route::post('login', [LoginController::class, 'login']);
