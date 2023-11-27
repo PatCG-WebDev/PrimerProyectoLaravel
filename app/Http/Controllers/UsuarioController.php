@@ -21,7 +21,16 @@ class UsuarioController extends Controller
 
     public function store(StoreUser $request){
 
-        $usuario = User::create($request->all()); /* asignación masiva */
+        $usuario = User::create([
+            'name' => $request->name,
+            'slug'=>$request->slug,
+            'surName'=>$request->surName, 
+            'userName'=>$request->userName,
+            'password' => bcrypt($request->password),
+            'email' => $request->email,
+            'phone'=>$request->phone, 
+            'seccion'=>$request->seccion,
+        ]);
 
         return redirect()->route('usuarios.show', $usuario);
     }
@@ -59,5 +68,7 @@ class UsuarioController extends Controller
 
         return redirect()->route('usuarios.index', $usuario);
     }
+
+    
 
 }

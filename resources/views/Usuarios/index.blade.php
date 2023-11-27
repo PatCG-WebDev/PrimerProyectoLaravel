@@ -1,4 +1,4 @@
-{{-- @extends('layouts.plantilla')
+@extends('layouts.plantilla')
 
 @section('title', 'Usuarios')
 
@@ -14,4 +14,4 @@
     </ul>
 
     {{$usuarios->links()}}  --}}{{-- Paginamos. Mostramos el menú para movernos por las diferentes páginas de los registos. --}}
-{{--     @endsection --}}
+@endsection

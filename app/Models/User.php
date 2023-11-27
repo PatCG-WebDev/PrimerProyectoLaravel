@@ -3,12 +3,16 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Hash;
 
-class User extends Model
+class User extends Authenticatable
 {
-    use HasFactory;
-     protected $fillable = [ /* escribimos los campos que queremos permitir que se guarden en la base de datos */
+    use HasFactory, HasApiTokens, Notifiable;
+
+    protected $fillable = [
         'name', 
         'slug',
         'surName', 
@@ -16,14 +20,30 @@ class User extends Model
         'password',
         'email', 
         'phone', 
-        'seccion'] ;
+        'seccion'
+    ];
 
-    /* protected $guarded = [];     */ /* escribimos los campos que no queremos que se guarden (campos protegidos).(en caso de usuario malicioso que intente modificar algo desde fuera) */
+    public function setPasswordAttribute($value)
+    {
+        if(Hash::needsRehash($value) ) {
+            $value = Hash::make($value);
+        }
+        $this->attributes['password'] = $value;
+    }
 
+
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
 
     public function getRouteKeyName()
     {
         return 'slug';
     }
 
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'password' => 'hashed',
+    ];
 }
