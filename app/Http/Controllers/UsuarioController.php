@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Requests\StoreUser;
 use App\Http\Requests\UpdateUser;
+use Illuminate\Support\Facades\Auth;
 
 class UsuarioController extends Controller
 {
@@ -69,6 +70,40 @@ class UsuarioController extends Controller
         return redirect()->route('usuarios.index', $usuario);
     }
 
+    public function showLoginForm()
+    {
+        return view('auth.login');
+    }
+
+    public function login(Request $request)
+    {
+        $credentials = [
+            'email' => $request->email,
+            'password' => $request->password,
+        ];
     
+        $remember = $request->has('remember');
+    
+        if (Auth::attempt($credentials, $remember)) {
+
+            $request->session()->regenerate();
+            return redirect()->intended(route('usuarios.index'));
+
+        } else {
+            return redirect('login');
+        }
+    }
+    
+
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerate();
+
+        return redirect()->route('home');
+    }
 
 }

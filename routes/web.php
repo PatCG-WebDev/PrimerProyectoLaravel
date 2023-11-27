@@ -28,6 +28,10 @@ Route::get('/', HomeController::class)->name('home');
  Route::get('usuarios/{usuario}', [UsuarioController::class, 'show'])->name('usuarios.show');
  Route::get('usuarios/{usuario}/edit', [UsuarioController::class, 'edit'])->name('usuarios.edit');
  Route::put('usuarios/{usuario}', [UsuarioController::class, 'update'])->name('usuarios.update');
+ Route::post('usuarios/{usuario}', [UsuarioController::class, 'destroy'])->name('usuarios.destroy');
+ Route::get('login', [UsuarioController::class, 'showLoginForm'])->name('login');
+ Route::post('/inicia-sesion', [UsuarioController::class, 'login'])->name('inicia-sesion');
+ Route::get('logout', [UsuarioController::class, 'logout'])->name('logout');
 
  Route::view('/create',"create")->name('create');
 
@@ -38,11 +42,5 @@ Route::view('nosotros', 'nosotros')->name('nosotros');
 Route::get('contactanos', [ContactanosController::class,'index'])->name('contactanos.index');
 Route::post('contactanos', [ContactanosController::class, 'store'])->name('contactanos.store');
 
-/* Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
-Route::post('login', [LoginController::class, 'login']);
- */
 
-Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
-/* Route::post('login', [LoginController::class, 'login']); */
-Route::post('/inicia-sesion', [LoginController::class, 'login'])->name('inicia-sesion');
-Route::get('logout', [LoginController::class, 'logout'])->name('logout');
+

@@ -6,7 +6,7 @@
     <h1>En esta página podrás crear un usuario</h1>
 
     
-    <form action="{{route('usuarios.store')}}" method="post">
+    <form action="{{route('usuarios.index')}}" method="post">
 
         @csrf {{-- token de seguridad para evitar modificar el formulario de forma externa --}}
 
